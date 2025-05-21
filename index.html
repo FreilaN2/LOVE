@@ -22,7 +22,7 @@
       background-size: cover;
       background-position: center;
     }
-     h1 {
+    h1 {
       color: #d81b60;
       /* contorno negro nativo WebKit */
       -webkit-text-stroke: 1px #000;
@@ -115,7 +115,8 @@
   </style>
 </head>
 <body>
-    <img src="love.png" width="300" height="400" alt="Corazón" style="position: absolute; top: 100px; left: 100px; z-index: 2;">
+  <img src="love.png" width="300" height="400" alt="Corazón" style="position: absolute; top: 100px; left: 100px; z-index: 2;">
+
   <h1>¡Feliz Cumpleaños, Mi Amor! ❤️</h1>
   
   <div class="envelope" onclick="toggleEnvelope()">
@@ -130,8 +131,8 @@
     </div>
   </div>
 
-  <!-- Reproductor de audio local (coloca tu archivo "musica.mp3" en la misma carpeta) -->
-  <audio id="audioPlayer" src="love.mp3" autoplay loop></audio>
+  <!-- Reproductor de audio local (coloca tu archivo "love.mp3" en la misma carpeta) -->
+  <audio id="audioPlayer" src="love.mp3" autoplay loop muted></audio>
   <button class="music-control" onclick="toggleMusic()">🔇 Silenciar</button>
 
   <script>
