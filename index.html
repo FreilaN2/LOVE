@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Feliz Cumpleaños, Mi Amor</title>
 
+  <!-- Favicon corazón -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='red' d='M23.6,4c-2.8,0-5.2,1.8-6.6,4.4C15.6,5.8,13.2,4,10.4,4C6,4,2.6,7.4,2.6,11.8 c0,9.3,13.4,15.8,13.8,16c0.4-0.2,13.8-6.7,13.8-16C29.4,7.4,26,4,23.6,4z'/%3E%3C/svg%3E" type="image/svg+xml" />
 
   <style>
@@ -24,9 +25,7 @@
     }
     h1 {
       color: #d81b60;
-      /* contorno negro nativo WebKit */
       -webkit-text-stroke: 1px #000;
-      /* fallback para otros navegadores */
       text-shadow:
         -1px -1px 0 #000,
          1px -1px 0 #000,
@@ -40,86 +39,89 @@
       height: 200px;
       background-color: #f8bbd0;
       border-radius: 5px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       cursor: pointer;
-      transition: all 0.5s ease;
+      transition: all .5s ease;
       z-index: 1;
     }
     .envelope:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: 0;
-      height: 0;
+      content:'';
+      position: absolute; top:0;
+      left:0; right:0;
+      margin: auto;
+      width: 0; height: 0;
       border-left: 150px solid transparent;
-      border-right: 150px solid transparent;
-      border-top: 100px solid #f06292;
+      border-right:150px solid transparent;
+      border-top:100px solid #f06292;
       transform-origin: top;
-      transition: all 0.5s ease;
-      z-index: 3;
+      transition: all .5s ease;
+      z-index:3;
     }
     .envelope.open:before {
       transform: rotateX(180deg);
-      z-index: 0;
+      z-index:0;
     }
     .envelope.open {
       transform: translateY(100px);
-      height: 300px;
+      height:300px;
     }
     .letter {
-      position: absolute;
-      width: 90%;
-      height: 0;
-      background-color: white;
-      margin: 5%;
-      border-radius: 3px;
-      padding: 0;
-      box-sizing: border-box;
-      transition: all 0.5s ease;
-      z-index: 2;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      opacity: 0;
+      position:absolute;
+      top:0; left:0; right:0; bottom:0;
+      width:90%; height:0;
+      margin: auto;
+      background:white;
+      border-radius:3px;
+      padding:0;
+      box-sizing:border-box;
+      transition: all .5s ease;
+      z-index:2;
+      overflow:hidden;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+      opacity:0;
     }
     .envelope.open .letter {
       transform: translateY(-100px);
-      height: 260px;
-      padding: 15px;
-      opacity: 1;
-      overflow-y: auto;
+      height:260px;
+      padding:15px;
+      opacity:1;
+      overflow-y:auto;
     }
     .heart {
-      position: absolute;
-      font-size: 24px;
-      color: #d81b60;
+      position:absolute;
+      font-size:24px;
+      color:#d81b60;
       animation: float 3s ease-in-out infinite;
     }
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
+      0%,100% { transform: translateY(0); }
       50%     { transform: translateY(-20px); }
     }
     .signature {
       font-style: italic;
       text-align: right;
-      margin-top: 20px;
+      margin-top:20px;
     }
     .music-control {
-      margin-top: 20px;
-      background-color: #d81b60;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
+      margin-top:20px;
+      background-color:#d81b60;
+      color:white;
+      border:none;
+      padding:10px 20px;
+      border-radius:5px;
+      cursor:pointer;
     }
   </style>
 </head>
 <body>
-  <img src="love.png" width="300" height="400" alt="Corazón" style="position: absolute; top: 100px; left: 100px; z-index: 2;">
+  <!-- Imagen decorativa -->
+  <img src="love.png" width="300" height="400" alt="Corazón"
+       style="position:absolute; top:100px; left:100px; z-index:2;">
 
   <h1>¡Feliz Cumpleaños, Mi Amor! ❤️</h1>
-  
-  <div class="envelope" onclick="toggleEnvelope()">
+
+  <!-- Al hacer clic aquí abrimos el sobre y desbloqueamos el audio -->
+  <div class="envelope" onclick="toggleEnvelopeAndAudio()">
     <div class="letter">
       <h2>Para mi esposa hermosa :3</h2>
       <p>Querida Dayana Villamizar,</p>
@@ -131,17 +133,19 @@
     </div>
   </div>
 
- <!-- audio local, inicia silenciado -->
+  <!-- Audio local: inicia silenciado para permitir autoplay -->
   <audio id="audioPlayer" src="love.mp3" autoplay loop muted></audio>
   <button class="music-control" onclick="toggleMusic()">🔇 Silenciar</button>
 
   <script>
     const audio = document.getElementById('audioPlayer');
     const btn   = document.querySelector('.music-control');
+    const env   = document.querySelector('.envelope');
 
-    /** Cuando abres el sobre, quitamos el muted (user gesture) */
-    function handleEnvelope() {
-      document.querySelector('.envelope').classList.toggle('open');
+    function toggleEnvelopeAndAudio() {
+      // Abrir/cerrar sobre
+      env.classList.toggle('open');
+      // Si aún está silenciado, quita mute en el primer clic
       if (audio.muted) {
         audio.muted = false;
         btn.textContent = '🔇 Silenciar';
