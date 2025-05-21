@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Cumpleaños, Mi Amor</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='red' d='M23.6,4c-2.8,0-5.2,1.8-6.6,4.4C15.6,5.8,13.2,4,10.4,4C6,4,2.6,7.4,2.6,11.8 c0,9.3,13.4,15.8,13.8,16c0.4-0.2,13.8-6.7,13.8-16C29.4,7.4,26,4,23.6,4z'/%3E%3C/svg%3E" type="image/svg+xml" />
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffebee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+     h1 {
+      color: #d81b60;
+      /* contorno negro nativo WebKit */
+      -webkit-text-stroke: 1px #000;
+      /* fallback para otros navegadores */
+      text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+      margin-bottom: 30px;
+    }
+    .envelope {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      background-color: #f8bbd0;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+    .envelope:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-top: 100px solid #f06292;
+      transform-origin: top;
+      transition: all 0.5s ease;
+      z-index: 3;
+    }
+    .envelope.open:before {
+      transform: rotateX(180deg);
+      z-index: 0;
+    }
+    .envelope.open {
+      transform: translateY(100px);
+      height: 300px;
+    }
+    .letter {
+      position: absolute;
+      width: 90%;
+      height: 0;
+      background-color: white;
+      margin: 5%;
+      border-radius: 3px;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.5s ease;
+      z-index: 2;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+    }
+    .envelope.open .letter {
+      transform: translateY(-100px);
+      height: 260px;
+      padding: 15px;
+      opacity: 1;
+      overflow-y: auto;
+    }
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: #d81b60;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%     { transform: translateY(-20px); }
+    }
+    .signature {
+      font-style: italic;
+      text-align: right;
+      margin-top: 20px;
+    }
+    .music-control {
+      margin-top: 20px;
+      background-color: #d81b60;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <img src="love.png" width="300" height="400" alt="Corazón" style="position: absolute; top: 100px; left: 100px; z-index: 2;">
+  <h1>¡Feliz Cumpleaños, Mi Amor! ❤️</h1>
+  
+  <div class="envelope" onclick="toggleEnvelope()">
+    <div class="letter">
+      <h2>Para mi esposa hermosa :3</h2>
+      <p>Querida Dayana Villamizar,</p>
+      <p>En este día tan especial, quiero recordarte lo mucho que significas para mí. Eres la luz que ilumina mis días, la razón por la que mi corazón late con tanta fuerza.</p>
+      <p>Cada momento a tu lado es un regalo que atesoro profundamente. Tu sonrisa es mi alegría, tu voz mi melodía favorita.</p>
+      <p>Hoy celebramos tu vida, que es el mayor regalo que he recibido. Que este nuevo año te traiga tanta felicidad como la que tú me das a mí cada día.</p>
+      <p>Te amo más de lo que podría expresar con palabras, y te amaré siempre.</p>
+      <div class="signature">Con todo mi amor,<br>Jesús</div>
+    </div>
+  </div>
+
+  <!-- Reproductor de audio local (coloca tu archivo "musica.mp3" en la misma carpeta) -->
+  <audio id="audioPlayer" src="love.mp3" autoplay loop></audio>
+  <button class="music-control" onclick="toggleMusic()">🔇 Silenciar</button>
+
+  <script>
+    const audio = document.getElementById('audioPlayer');
+    const btn   = document.querySelector('.music-control');
+    
+    function toggleMusic() {
+      audio.muted = !audio.muted;
+      btn.textContent = audio.muted ? '🔊 Sonido' : '🔇 Silenciar';
+    }
+
+    function toggleEnvelope() {
+      document.querySelector('.envelope').classList.toggle('open');
+    }
+
+    function createHearts() {
+      const colors = ['#ff0000', '#ff69b4', '#d81b60', '#ff1493'];
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        document.body.appendChild(heart);
+      }
+    }
+
+    window.onload = createHearts;
+  </script>
+</body>
+</html>
