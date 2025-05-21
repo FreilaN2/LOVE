@@ -131,38 +131,44 @@
     </div>
   </div>
 
-  <!-- Reproductor de audio local (coloca tu archivo "love.mp3" en la misma carpeta) -->
+ <!-- audio local, inicia silenciado -->
   <audio id="audioPlayer" src="love.mp3" autoplay loop muted></audio>
   <button class="music-control" onclick="toggleMusic()">🔇 Silenciar</button>
 
   <script>
     const audio = document.getElementById('audioPlayer');
     const btn   = document.querySelector('.music-control');
-    
-    function toggleMusic() {
-      audio.muted = !audio.muted;
-      btn.textContent = audio.muted ? '🔊 Sonido' : '🔇 Silenciar';
-    }
 
-    function toggleEnvelope() {
+    /** Cuando abres el sobre, quitamos el muted (user gesture) */
+    function handleEnvelope() {
       document.querySelector('.envelope').classList.toggle('open');
-    }
-
-    function createHearts() {
-      const colors = ['#ff0000', '#ff69b4', '#d81b60', '#ff1493'];
-      for (let i = 0; i < 15; i++) {
-        const heart = document.createElement('div');
-        heart.innerHTML = '❤️';
-        heart.classList.add('heart');
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.top = Math.random() * 100 + 'vh';
-        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        heart.style.animationDelay = Math.random() * 5 + 's';
-        document.body.appendChild(heart);
+      if (audio.muted) {
+        audio.muted = false;
+        btn.textContent = '🔇 Silenciar';
       }
     }
 
+    function toggleMusic() {
+      audio.muted = !audio.muted;
+      btn.textContent = audio.muted
+        ? '🔊 Sonido'
+        : '🔇 Silenciar';
+    }
+
+    function createHearts() {
+      const colors = ['#ff0000','#ff69b4','#d81b60','#ff1493'];
+      for (let i=0; i<15; i++){
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.classList.add('heart');
+        heart.style.left = Math.random()*100+'vw';
+        heart.style.top  = Math.random()*100+'vh';
+        heart.style.fontSize = (Math.random()*20+10)+'px';
+        heart.style.animationDuration = (Math.random()*3+2)+'s';
+        heart.style.animationDelay = Math.random()*5+'s';
+        document.body.appendChild(heart);
+      }
+    }
     window.onload = createHearts;
   </script>
 </body>
