@@ -7,6 +7,7 @@
 
   <!-- Favicon corazón -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='red' d='M23.6,4c-2.8,0-5.2,1.8-6.6,4.4C15.6,5.8,13.2,4,10.4,4C6,4,2.6,7.4,2.6,11.8 c0,9.3,13.4,15.8,13.8,16c0.4-0.2,13.8-6.7,13.8-16C29.4,7.4,26,4,23.6,4z'/%3E%3C/svg%3E" type="image/svg+xml" />
+  <link rel="stylesheet" href="responsive.css">
 
   <style>
     /* ----- Estilos Generales ----- */
@@ -134,8 +135,8 @@ h1 {
 </head>
 <body>
   <!-- Imagen decorativa -->
-  <img src="love.png" width="300" height="400" alt="Corazón"
-       style="position:absolute; top:100px; left:100px; z-index:2;">
+<img src="love.png" class="decorative-heart" alt="Corazón">
+
 
   <h1>¡Feliz Cumpleaños, Mi Amor! ❤️</h1>
 
@@ -191,5 +192,21 @@ h1 {
     }
     window.onload = createHearts;
   </script>
+
+  <script>
+  function adaptDecorativeHeart() {
+    const img = document.querySelector('.decorative-heart');
+    if (!img) return;
+    if (window.innerWidth <= 600) {
+      img.classList.add('mobile');
+    } else {
+      img.classList.remove('mobile');
+    }
+  }
+
+  window.addEventListener('load', adaptDecorativeHeart);
+  window.addEventListener('resize', adaptDecorativeHeart);
+</script>
+
 </body>
 </html>
