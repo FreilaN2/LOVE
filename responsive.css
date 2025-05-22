@@ -1,0 +1,115 @@
+/* responsive.css */
+
+/* ===== Desktop: permiso de scroll vertical ===== */
+body {
+  overflow-y: auto;
+}
+
+/* ===== Tipografía fluida ===== */
+h1 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  margin-bottom: 2vh;
+  text-align: center;
+}
+.letter h2 {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+}
+.letter p {
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  line-height: 1.4;
+}
+
+/* ===== Corazones flotantes ===== */
+.heart {
+  font-size: clamp(1.2rem, 4vw, 2rem);
+}
+
+/* ===== Botón de música ===== */
+.music-control {
+  display: block;
+  margin: 3vh auto;
+  padding: 1vh 2vw;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+}
+
+/* ===== Sobre (envelope) ===== */
+.envelope {
+  width: clamp(200px, 60vw, 300px);
+  aspect-ratio: 3 / 2;
+  transition: height 0.5s ease, width 0.5s ease;
+}
+.envelope.open {
+  height: clamp(300px, 60vw * 1.5, 450px);
+  aspect-ratio: auto;
+}
+
+/* ===== Carta interior ===== */
+.letter {
+  position: absolute;
+  top: 33.333%;
+  left: 0;
+  width: 100%;
+  height: 0;
+  transition: height 0.5s ease, opacity 0.5s ease;
+}
+.envelope.open .letter {
+  height: 66.667%;
+  padding: 2vh 2vw;
+  overflow-y: auto;
+  opacity: 1;
+}
+
+/* ===== Imagen decorativa (escritorio) ===== */
+.decorative-heart {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 30%;
+  max-width: 300px;
+  height: auto;
+  z-index: 2;
+}
+
+/* ================= Mobile (≤600px) ================= */
+@media (max-width: 600px) {
+  /* 1) Convertimos body en flex-column para reordenar */
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 2) Sobre primero, con ancho controlado */
+  .envelope {
+    order: 1 !important;
+    width: clamp(200px, 80vw, 350px) !important;  /* nunca más de 350px */
+  }
+  .envelope.open {
+    height: auto !important;
+  }
+  .envelope.open .letter {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 60vh !important;
+    padding: 2vh 4vw !important;
+    overflow-y: auto !important;
+  }
+
+  /* 3) Botón sigue después */
+  .music-control {
+    order: 2 !important;
+  }
+
+  /* 4) Imagen decorativa al final, pequeña y centrada */
+  .decorative-heart {
+    order: 3 !important;
+    position: static !important;
+    margin: 2vh auto 0 !important;
+    width: clamp(80px, 40vw, 150px) !important;
+    height: auto !important;
+    top: auto !important;
+    left: auto !important;
+    z-index: auto !important;
+  }
+}
